@@ -11,7 +11,8 @@ public class BookEntity {
 	
 	public BookEntity(int newId, String title, String author, BookStatus status, LocalDateTime createdAt) {
 	}
-
+	public BookEntity() {
+	}
 	public Integer getId() {
 		return id;
 	}

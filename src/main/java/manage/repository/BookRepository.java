@@ -8,14 +8,15 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;//この
 
 import manage.entity.BookEntity;
+import manage.entity.BookStatus;
 @Repository
-
 public class BookRepository{
 	private final JdbcClient jdbcClient;
 	public BookRepository(JdbcClient jdbcClient) {
 		this.jdbcClient = jdbcClient;
 	}
 	
+	//ID検索
 	public Optional<BookEntity> searchById(Integer id){
 		Optional<BookEntity> bookOptional = jdbcClient.sql("""
 				SELECT id, title,author, status, createdAt
@@ -26,6 +27,8 @@ public class BookRepository{
 		return bookOptional;
 	}
 	
+	
+	//タイトル検索
 	public List<BookEntity> searchByTitle(String titleKeyword){
 		List<BookEntity> bookList=jdbcClient.sql("""
 				SELECT id, title, author, status, createdAt
@@ -36,17 +39,30 @@ public class BookRepository{
 		return bookList;
 	}
 	
+	//著者検索
 	public List<BookEntity> searchByAuthor(String authorKeyword){
 		List<BookEntity> bookList=jdbcClient.sql("""
 				SELECT id, title, author, status, createdAt
-				FROM Book WHERE author LIKE :author ORDER BY id
+				FROM book WHERE author LIKE :author ORDER BY id
 				""")
 				.param("author","%"+authorKeyword+"%")
 				.query(new DataClassRowMapper<>(BookEntity.class)).list();
 		return bookList;
 	}
 	
-	public int countById(Integer id) { //指定したIDが何件あるか数えるメソッド
+	//ステータス検索
+	public List<BookEntity> searchByStatus(BookStatus status){
+		List<BookEntity> bookList = jdbcClient.sql("""
+				SELECT id, title, author, status, createdAt
+				FROM book WHERE status = :status ORDER BY id
+				""")
+				.param("status",status)
+				.query(new DataClassRowMapper<>(BookEntity.class)).list();
+		return bookList;
+	}
+	
+	 //指定したIDが何件あるか数えるメソッド
+	public int countById(Integer id) {
 		int count = jdbcClient.sql("""
 				SELECT COUNT(*) FROM book
 				WHERE id = :id
@@ -56,7 +72,9 @@ public class BookRepository{
 				.single();
 				return count;
 	}
-	public int update(BookEntity book) { //登録済み本の内容の編集
+	
+	//登録済み本の内容の編集
+	public int update(BookEntity book) { 
 		int rows = jdbcClient.sql("""
 				UPDATE book
 				SET title = :title, author= :author, status = :status
@@ -69,7 +87,8 @@ public class BookRepository{
 		return rows;
 	}
 	
-	public int delete(Integer id) { //削除
+	//削除
+	public int delete(Integer id) { 
 		int rows = jdbcClient.sql("""
 				DELETE FROM book WHERE id = :id
 				""")
@@ -77,8 +96,10 @@ public class BookRepository{
 				.update();
 return rows;
 	}
+	
+	// DBが作るIDを受け取る箱の用意
 	public BookEntity insert (BookEntity book) {
-		GeneratedKeyHolder keyHolder = new GeneratedKeyHolder(); // DBが作るIDを受け取る箱の用意
+		GeneratedKeyHolder keyHolder = new GeneratedKeyHolder(); 
 		jdbcClient.sql("""
 			 INSERT INTO book(title, author, status, createdAt)
 		VALUES(:title, :author, :status, :createdAt)
