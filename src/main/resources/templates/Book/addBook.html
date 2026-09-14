@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>本を追加</title>
+    <link rel="stylesheet" th:href="@{/css/addBook.css}">
+</head>
+
+<body>
+
+    <div class="add-book-container">
+
+        <h1>本を追加</h1>
+
+        <form th:action="@{/book/addBook}"
+              method="post"
+              class="add-book-form">
+
+            <div class="form-group">
+                <label for="title">タイトル</label>
+                <input type="text"
+                       id="title"
+                       name="title"
+                       placeholder="本のタイトルを入力">
+            </div>
+
+            <div class="form-group">
+                <label for="author">著者</label>
+                <input type="text"
+                       id="author"
+                       name="author"
+                       placeholder="著者名を入力">
+            </div>
+
+            <div class="form-group">
+                <label for="status">ステータス</label>
+
+                <select id="status"
+                        name="status">
+
+                    <option value="">選択してください</option>
+                    <option value="UNREAD">未読</option>
+                    <option value="READING">読書中</option>
+                    <option value="READ">読了</option>
+
+                </select>
+            </div>
+
+            <div class="form-actions">
+
+                <a th:href="@{/}"
+                   class="back-button">
+                    戻る
+                </a>
+
+                <button type="submit"
+                        class="submit-button">
+                    追加
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

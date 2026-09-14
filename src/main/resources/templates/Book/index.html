@@ -51,8 +51,8 @@
                 <tr th:each="book : ${bookList}">
                     <td th:text="${book.title}"></td>
                     <td th:text="${book.author}"></td>
-                    <td th:text="${book.status}"></td>
-                    <td th:text="${book.createdAt}"></td>
+                    <td th:text="${book.status.label}"></td>
+                    <td th:text="${#temporals.format(book.createdAt, 'yyyy/MM/dd HH:mm')}"></td>
                 </tr>
             </tbody>
 
