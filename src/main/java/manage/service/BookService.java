@@ -55,24 +55,21 @@ public class BookService {
 	}
 
 	@Transactional(readOnly = false)
-	public int update(BookEntity book) {
-		int rows = bookRepository.update(book);
+	public int updateBook(BookEntity book) {
+		int rows = bookRepository.updateBook(book);
 		return rows;
 	}
 
 	@Transactional(readOnly = false)
-	public int delete(Integer id) {
-		int rows = bookRepository.delete(id);
+	public int deleteById(Integer id) {
+		int rows = bookRepository.deleteById(id);
 		return rows;
 	}
 
 	@Transactional(readOnly = false)
 	public BookEntity insert(BookEntity book) {
-
 		book.setCreatedAt(LocalDateTime.now());
-
 		BookEntity newBook = bookRepository.insert(book);
-
 		return newBook;
 	}
 }

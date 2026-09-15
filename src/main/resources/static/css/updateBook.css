@@ -1,16 +1,16 @@
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
+	align-items: center;
     margin: 0;
-    background-color: #f8fbfc;
     color: #333333;
     font-family: "Yu Gothic", "Meiryo", sans-serif;
 }
 
-/* 追加フォーム本体*/
-.add-book-container {
+/*全体*/
+.update-book-container{
     width: 90%;
     max-width: 620px;
     margin: 60px auto;
@@ -20,20 +20,20 @@ body {
     box-shadow: 0 3px 12px rgba(70, 100, 110, 0.08);
 }
 
-.add-book-container h1 {
-    margin-top: 0;
+.update-book-container h1{
+	margin-top: 0;
     margin-bottom: 32px;
     color: #527d88;
     text-align: center;
     font-size: 28px;
 }
-
-.add-book-form {
+	
+.update-book-form{
     display: flex;
     flex-direction: column;
     gap: 24px;
 }
-
+/*入力フォーム*/
 .form-group {
     display: flex;
     flex-direction: column;
@@ -65,6 +65,7 @@ body {
     box-shadow: 0 0 0 3px rgba(154, 197, 209, 0.15);
 }
 
+/*ボタンの位置*/
 .form-actions {
     display: flex;
     justify-content: center;
@@ -72,38 +73,40 @@ body {
     margin-top: 12px;
 }
 
+/*更新ボタン*/
 .submit-button {
-    min-width: 130px;
-    height: 52px;
-    padding: 0 24px;
-    border: none;
-    border-radius: 14px;
-    background-color: #9ac5d1;
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+	min-width: 130px;
+	height: 52px;
+	padding: 0 24px;
+	border: none;
+	border-radius: 14px;
+	background-color: #9ac5d1;
+	color: #ffffff;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
 }
 
-.submit-button:hover {
-    background-color: #86b6c2;
+.submit-button :hover{
+	background-color: #d7ebef;
 }
-
+/*戻るボタン*/
 .back-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 130px;
-    height: 52px;
-    padding: 0 24px;
-    background-color: #e7f2f5;
-    color: #527d88;
-    border-radius: 14px;
-    font-size: 16px;
-    font-weight: bold;
-    text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 130px;
+	height: 52px;
+	padding: 0 24px;
+	background-color: #e7f2f5;
+	color: #527d88;
+	border-radius: 14px;
+	font-size: 16px;
+	font-weight: bold;
+	text-decoration: none;
 }
 
 .back-button:hover {
-    background-color: #d7ebef;
+	background-color: #d7ebef;
 }
+

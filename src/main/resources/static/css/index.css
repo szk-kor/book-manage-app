@@ -16,9 +16,7 @@ body {
 }
 
 
-/* =========================
-   検索
-========================= */
+/*検索*/
 
 .search-form {
     display: flex;
@@ -66,10 +64,7 @@ body {
 }
 
 
-/* =========================
-   追加ボタン
-========================= */
-
+/*追加ボタン*/
 .add-button {
     display: inline-block;
 
@@ -90,10 +85,7 @@ body {
 }
 
 
-/* =========================
-   本一覧
-========================= */
-
+/* 本一覧*/
 .book-table {
     width: 100%;
 
@@ -109,8 +101,6 @@ body {
     box-shadow: 0 3px 12px rgba(70, 100, 110, 0.08);
 }
 
-
-/* ★ここが消えてた部分 */
 .book-table thead {
     background-color: #9ac5d1;
 }
@@ -155,4 +145,85 @@ body {
 
 .book-table tbody tr:hover td {
     background-color: #f1f8f9;
+}
+/*
+.book-table button {
+    height: 54px;
+    padding: 0 24px;
+
+    border: none;
+    border-radius: 14px;
+
+    background-color: #9ac5d1;
+    color: #ffffff;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.book-table button:hover {
+    background-color: #86b6c2;
+}*/.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.action-buttons form {
+    margin: 0;
+}
+
+
+/* 編集 */
+.updateBook-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 80px;
+    height: 50px;
+
+    background-color: #e7f2f5;
+    color: #527d88;
+
+    border: none;
+    border-radius: 14px;
+
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.updateBook-button:hover {
+    background-color: #d7ebef;
+}
+
+
+/* 削除 */
+.deleteBook-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 80px;
+    height: 50px;
+
+    background-color: #9ac5d1;
+    color: #ffffff;
+
+    border: none;
+    border-radius: 14px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.deleteBook-button:hover {
+    background-color: #86b6c2;
 }

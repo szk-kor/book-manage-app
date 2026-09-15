@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>本棚</title>
+
+<link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+
+<body>
+
+	<main class="container">
+
+		<!-- 検索 -->
+		<form class="search-form" th:action="@{/}" method="get">
+
+			<input type="text" name="titleKeyword" placeholder="検索したいキーワード">
+
+			<button type="submit">検索</button>
+
+		</form>
+
+
+		<!-- 追加 -->
+		<a class="add-button" th:href="@{/book/addBook}"> 新しい本の追加 </a>
+
+
+		<!-- 本一覧 -->
+		<table class="book-table">
+
+			<thead>
+				<tr>
+					<th>タイトル</th>
+					<th>著者</th>
+					<th>ステータス</th>
+					<th>登録日</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="book : ${bookList}">
+					<td th:text="${book.title}"></td>
+					<td th:text="${book.author}"></td>
+					<td th:text="${book.status.label}"></td>
+					<td
+						th:text="${#temporals.format(book.createdAt, 'yyyy/MM/dd HH:mm')}"></td>
+					<td>
+    <div class="action-buttons">
+
+        <a class="updateBook-button"
+           th:href="@{/book/updateBook/{id}(id=${book.id})}">
+            編集
+        </a>
+
+        <form th:action="@{/book/deleteBook/{id}(id=${book.id})}"
+              method="post">
+            <button class="deleteBook-button"
+                    type="submit"
+                    onclick="return confirm('削除しますか？')">
+                削除
+            </button>
+        </form>
+
+    </div>
+</td>
+				</tr>
+			</tbody>
+
+		</table>
+
+	</main>
+
+</body>
+
+</html>

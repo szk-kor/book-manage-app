@@ -76,18 +76,18 @@ public class BookRepository {
 	}
 
 	// 登録済み本の内容の編集
-	public int update(BookEntity book) {
+	public int updateBook(BookEntity book) {
 		int rows = jdbcClient.sql("""
 				UPDATE book
 				SET title = :title, author= :author, status = :status
 				WHERE id = :id
-				""").param("title", book.getTitle()).param("author", book.getAuthor()).param("status", book.getStatus())
-				.update();
+				""").param("id", book.getId()).param("title", book.getTitle()).param("author", book.getAuthor())
+				.param("status", book.getStatus().name()).update();
 		return rows;
 	}
 
 	// 削除
-	public int delete(Integer id) {
+	public int deleteById(Integer id) {
 		int rows = jdbcClient.sql("""
 				DELETE FROM book WHERE id = :id
 				""").param("id", id).update();
