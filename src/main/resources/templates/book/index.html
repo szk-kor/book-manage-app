@@ -13,14 +13,40 @@
 	<main class="container">
 
 		<!-- 検索 -->
-		<form class="search-form" th:action="@{/}" method="get">
+		<div class="search-area">
+			<form th:action="@{/book/searchByKeyword}" method="get">
+				<input type="text" name="keyword" th:value="${param.keyword}"
+					placeholder="検索したいタイトルや著者">
+				<button type="submit">検索</button>
+			
+			</form>
+			<form th:action="@{/book/searchByStatus}" method="get">
+				<select name="status">
 
-			<input type="text" name="titleKeyword" placeholder="検索したいキーワード">
+					<option value=""
+						th:selected="${param.status == null or param.status[0] == ''}">
+						すべて</option>
 
-			<button type="submit">検索</button>
+					<option value="UNREAD"
+						th:selected="${param.status != null and param.status[0] == 'UNREAD'}">
+						未読</option>
 
-		</form>
+					<option value="READING"
+						th:selected="${param.status != null and param.status[0] == 'READING'}">
+						読書中</option>
 
+					<option value="READ"
+						th:selected="${param.status != null and param.status[0] == 'READ'}">
+						読了</option>
+
+				</select>
+				<button type="submit">検索</button>
+				
+			</form>
+				<form th:action="@{/}" method="get">
+					<button type="submit">一覧に戻る</button>
+				</form>
+		</div>
 
 		<!-- 追加 -->
 		<a class="add-button" th:href="@{/book/addBook}"> 新しい本の追加 </a>
@@ -47,24 +73,19 @@
 					<td
 						th:text="${#temporals.format(book.createdAt, 'yyyy/MM/dd HH:mm')}"></td>
 					<td>
-    <div class="action-buttons">
+						<div class="action-buttons">
 
-        <a class="updateBook-button"
-           th:href="@{/book/updateBook/{id}(id=${book.id})}">
-            編集
-        </a>
+							<a class="updateBook-button"
+								th:href="@{/book/updateBook/{id}(id=${book.id})}"> 編集 </a>
 
-        <form th:action="@{/book/deleteBook/{id}(id=${book.id})}"
-              method="post">
-            <button class="deleteBook-button"
-                    type="submit"
-                    onclick="return confirm('削除しますか？')">
-                削除
-            </button>
-        </form>
+							<form th:action="@{/book/deleteBook/{id}(id=${book.id})}"
+								method="post">
+								<button class="deleteBook-button" type="submit"
+									onclick="return confirm('削除しますか？')">削除</button>
+							</form>
 
-    </div>
-</td>
+						</div>
+					</td>
 				</tr>
 			</tbody>
 

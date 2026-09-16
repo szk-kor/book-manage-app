@@ -38,23 +38,15 @@ public class BookRepository {
 		return bookOptional;
 	}
 
-	// タイトル検索
-	public List<BookEntity> searchByTitle(String titleKeyword) {
-		List<BookEntity> bookList = jdbcClient.sql("""
+	// 著者とタイトル両方検索に変更
+	public List<BookEntity> searchByKeyword(String keyword) {
+		return jdbcClient.sql("""
 				SELECT id, title, author, status, createdAt
-				FROM Book WHERE title LIKE :title ORDER BY id
-				""").param("title", "%" + titleKeyword + "%").query(new DataClassRowMapper<>(BookEntity.class)).list();
-		return bookList;
-	}
-
-	// 著者検索
-	public List<BookEntity> searchByAuthor(String authorKeyword) {
-		List<BookEntity> bookList = jdbcClient.sql("""
-				SELECT id, title, author, status, createdAt
-				FROM book WHERE author LIKE :author ORDER BY id
-				""").param("author", "%" + authorKeyword + "%").query(new DataClassRowMapper<>(BookEntity.class))
-				.list();
-		return bookList;
+				FROM book
+				WHERE title LIKE :keyword
+				OR author LIKE :keyword
+				ORDER BY id
+				""").param("keyword", "%" + keyword + "%").query(new DataClassRowMapper<>(BookEntity.class)).list();
 	}
 
 	// ステータス検索
@@ -62,7 +54,7 @@ public class BookRepository {
 		List<BookEntity> bookList = jdbcClient.sql("""
 				SELECT id, title, author, status, createdAt
 				FROM book WHERE status = :status ORDER BY id
-				""").param("status", status).query(new DataClassRowMapper<>(BookEntity.class)).list();
+				""").param("status", status.name()).query(new DataClassRowMapper<>(BookEntity.class)).list();
 		return bookList;
 	}
 
