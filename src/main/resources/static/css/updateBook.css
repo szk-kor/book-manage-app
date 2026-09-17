@@ -110,3 +110,7 @@ body {
 	background-color: #d7ebef;
 }
 
+.error-messages {
+	color: #c94f5c;
+	border-color: #c94f5c;
+}

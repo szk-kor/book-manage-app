@@ -61,21 +61,25 @@ public class BookController {
 	@GetMapping("/book/updateBook/{id}")
 	public String showUpdateForm(@PathVariable Integer id, Model model) {
 		BookEntity book = bookService.searchById(id).orElseThrow();
-		model.addAttribute("book", book);
+		BookForm bookForm = new BookForm(book.getTitle(), book.getAuthor(), book.getStatus());
+		model.addAttribute("bookForm", bookForm);
+		model.addAttribute("id", id);
 		return "book/updateBook";
 	}
 
 	// 編集
 	@PostMapping("/book/updateBook/{id}")
 	public String updateBookPage(@PathVariable Integer id, @Validated @ModelAttribute("bookForm") BookForm bookForm,
-			BindingResult bindingResult) {
+			BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
+			model.addAttribute("id", id);
 			return "book/updateBook";
 		}
 		BookEntity bookEntity = new BookEntity();
 		bookEntity.setId(id);
 		bookEntity.setTitle(bookForm.title());
 		bookEntity.setAuthor(bookForm.author());
+		bookEntity.setStatus(bookForm.status());
 		bookService.updateBook(bookEntity);
 		return "redirect:/";
 	}

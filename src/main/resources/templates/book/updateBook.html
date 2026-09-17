@@ -12,59 +12,49 @@
 
 		<h1>本を編集</h1>
 
-		<form th:action="@{/book/updateBook/{id}(id=${book.id})}"
+		<form th:action="@{/book/updateBook/{id}(id=${id})}"
+      th:object="${bookForm}"
       method="post"
-      class="update-book-form">
+      class="update-book-form"
+      >
 
     <div class="form-group">
         <label for="title">タイトル</label>
         <input type="text"
                id="title"
-               name="title"
-               th:value="${book.title}">
+               th:field="*{title}">
+           <p class="error-messages"
+                       th:errors="*{title}"></p>
     </div>
 
     <div class="form-group">
         <label for="author">著者</label>
         <input type="text"
                id="author"
-               name="author"
-               th:value="${book.author}">
+               th:field="*{author}">
+                                      <p class="error-messages"
+                       th:errors="*{author}"></p>
     </div>
 
     <div class="form-group">
         <label for="status">ステータス</label>
-
-        <select id="status" name="status">
-            <option value="UNREAD"
-                    th:selected="${book.status.name() == 'UNREAD'}">
-                未読
-            </option>
-
-            <option value="READING"
-                    th:selected="${book.status.name() == 'READING'}">
-                読書中
-            </option>
-
-            <option value="READ"
-                    th:selected="${book.status.name() == 'READ'}">
-                読了
-            </option>
+        <select id="status" th:field="*{status}">
+            <option value="UNREAD">未読</option>
+            <option value="READING">読書中</option>
+            <option value="READ">読了</option>
         </select>
     </div>
 
     <div class="form-actions">
-        <a th:href="@{/}"
-           class="back-button">
+        <a th:href="@{/}" class="back-button">
             戻る
         </a>
 
-        <button type="submit"
-                class="submit-button">
+        <button type="submit" 
+        th:href= "@{/}" class="submit-button">
             更新
         </button>
     </div>
-
 </form>
 	</div>
 
