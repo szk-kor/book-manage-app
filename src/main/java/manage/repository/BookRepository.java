@@ -21,7 +21,6 @@ public class BookRepository {
 
 	// 全件表示
 	public List<BookEntity> findAll() {
-
 		return jdbcClient.sql("""
 				SELECT id, title, author, status, createdAt
 				FROM book
@@ -31,14 +30,14 @@ public class BookRepository {
 
 	// ID検索
 	public Optional<BookEntity> searchById(Integer id) {
-		Optional<BookEntity> bookOptional = jdbcClient.sql("""
+		return jdbcClient.sql("""
 				SELECT id, title,author, status, createdAt
 				FROM Book WHERE id = :id
 				""").param("id", id).query(new DataClassRowMapper<>(BookEntity.class)).optional();
-		return bookOptional;
+
 	}
 
-	// 著者とタイトル両方検索に変更
+	// 著者とタイトル両方検索
 	public List<BookEntity> searchByKeyword(String keyword) {
 		return jdbcClient.sql("""
 				SELECT id, title, author, status, createdAt
@@ -51,39 +50,36 @@ public class BookRepository {
 
 	// ステータス検索
 	public List<BookEntity> searchByStatus(BookStatus status) {
-		List<BookEntity> bookList = jdbcClient.sql("""
+		return jdbcClient.sql("""
 				SELECT id, title, author, status, createdAt
-				FROM book WHERE status = :status ORDER BY id
+				FROM book WHERE status = :status
 				""").param("status", status.name()).query(new DataClassRowMapper<>(BookEntity.class)).list();
-		return bookList;
 	}
 
 	// 指定したIDが何件あるか数えるメソッド
 	public int countById(Integer id) {
-		int count = jdbcClient.sql("""
+		return jdbcClient.sql("""
 				SELECT COUNT(*) FROM book
 				WHERE id = :id
 				""").param("id", id).query(Integer.class).single();
-		return count;
 	}
 
 	// 登録済み本の内容の編集
 	public int updateBook(BookEntity book) {
-		int rows = jdbcClient.sql("""
+		return jdbcClient.sql("""
 				UPDATE book
 				SET title = :title, author= :author, status = :status
 				WHERE id = :id
 				""").param("id", book.getId()).param("title", book.getTitle()).param("author", book.getAuthor())
 				.param("status", book.getStatus().name()).update();
-		return rows;
+
 	}
 
 	// 削除
 	public int deleteById(Integer id) {
-		int rows = jdbcClient.sql("""
+		return jdbcClient.sql("""
 				DELETE FROM book WHERE id = :id
 				""").param("id", id).update();
-		return rows;
 	}
 
 	// DBが作るIDを受け取る箱の用意
