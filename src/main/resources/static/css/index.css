@@ -11,7 +11,7 @@ body {
 
 .container {
 	width: 90%;
-	max-width: 900px;
+	max-width: 1100px;
 	margin: 60px auto;
 }
 
@@ -116,6 +116,34 @@ body {
 	position: sticky;
 	top: 0;
 	z-index: 1;
+}
+
+/*幅調整*/
+/* タイトル */
+.book-table th:nth-child(1),
+.book-table td:nth-child(1) {
+    width: 40%;
+}
+
+/* 著者 */
+.book-table th:nth-child(2),
+.book-table td:nth-child(2) {
+    width: 15%;
+}
+/*ステータス*/
+.book-table th:nth-child(3),
+.book-table td:nth-child(3){
+	width: 15%;
+}
+/*登録日*/
+.book-table th:nth-child(4),
+.book-table td:nth-child(4){
+	width:20%;
+}
+/*操作*/
+.book-table th:nth-child(5),
+.book-table td:nth-child(5) {
+	width:15%;
 }
 
 /* 左上の丸み */

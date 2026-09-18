@@ -33,6 +33,7 @@ public class BookRepository {
 		return jdbcClient.sql("""
 				SELECT id, title,author, status, createdAt
 				FROM Book WHERE id = :id
+				ORDER BY id
 				""").param("id", id).query(new DataClassRowMapper<>(BookEntity.class)).optional();
 
 	}
@@ -53,16 +54,15 @@ public class BookRepository {
 		return jdbcClient.sql("""
 				SELECT id, title, author, status, createdAt
 				FROM book WHERE status = :status
+				ORDER BY id
 				""").param("status", status.name()).query(new DataClassRowMapper<>(BookEntity.class)).list();
 	}
 
-	// 指定したIDが何件あるか数えるメソッド
-	public int countById(Integer id) {
-		return jdbcClient.sql("""
-				SELECT COUNT(*) FROM book
-				WHERE id = :id
-				""").param("id", id).query(Integer.class).single();
-	}
+	/*
+	 * // 指定したIDが何件あるか数えるメソッド public int countById(Integer id) { return
+	 * jdbcClient.sql(""" SELECT COUNT(*) FROM book WHERE id = :id """).param("id",
+	 * id).query(Integer.class).single(); }
+	 */
 
 	// 登録済み本の内容の編集
 	public int updateBook(BookEntity book) {
@@ -82,7 +82,7 @@ public class BookRepository {
 				""").param("id", id).update();
 	}
 
-	// DBが作るIDを受け取る箱の用意
+	// 新規登録
 	public BookEntity insert(BookEntity book) {
 		GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 		jdbcClient.sql("""
@@ -91,7 +91,9 @@ public class BookRepository {
 				""").param("title", book.getTitle()).param("author", book.getAuthor())
 				.param("status", book.getStatus().name()).param("createdAt", book.getCreatedAt())
 				.update(keyHolder, "id");
+		// DBが作るIDを受け取る箱の用意
 		int newId = keyHolder.getKey().intValue();
+		// 発行されたIDと一緒に新しい本の情報を返す
 		return new BookEntity(newId, book.getTitle(), book.getAuthor(), book.getStatus(), book.getCreatedAt());
 	}
 }

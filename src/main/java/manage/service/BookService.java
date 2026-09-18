@@ -30,15 +30,6 @@ public class BookService {
 		return bookOptional;
 	}
 
-	/*
-	 * @Transactional(readOnly = true) public List<BookEntity> searchByTitle(String
-	 * titleKeyword) { List<BookEntity> bookList =
-	 * bookRepository.searchByTitle(titleKeyword); return bookList; }
-	 * 
-	 * @Transactional(readOnly = true) public List<BookEntity> searchByAuthor(String
-	 * authorKeyword) { List<BookEntity> bookList =
-	 * bookRepository.searchByAuthor(authorKeyword); return bookList; }
-	 */
 	@Transactional(readOnly = true)
 	public List<BookEntity> searchByKeyword(String keyword) {
 		List<BookEntity> bookList = bookRepository.searchByKeyword(keyword);
@@ -49,12 +40,6 @@ public class BookService {
 	public List<BookEntity> searchByStatus(BookStatus status) {
 		List<BookEntity> bookList = bookRepository.searchByStatus(status);
 		return bookList;
-	}
-
-	@Transactional(readOnly = true)
-	public int countById(Integer id) {
-		int count = bookRepository.countById(id);
-		return count;
 	}
 
 	@Transactional(readOnly = false)
