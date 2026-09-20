@@ -1,4 +1,4 @@
-package manage.entity;
+package manage.persistence.entity;
 
 import java.time.LocalDateTime;
 

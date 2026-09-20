@@ -1,4 +1,4 @@
-package manage.repository;
+package manage.persistence.repository;
 
 import java.util.List; //複数件取得するとき用。
 import java.util.Optional;//ID検索してその本が存在しないかもしれないとき用
@@ -8,8 +8,8 @@ import org.springframework.jdbc.core.simple.JdbcClient;//実際にSQLをDBに投
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;//この
 
-import manage.entity.BookEntity;
-import manage.entity.BookStatus;
+import manage.persistence.entity.BookEntity;
+import manage.persistence.entity.BookStatus;
 
 @Repository
 public class BookRepository {
@@ -88,9 +88,10 @@ public class BookRepository {
 		jdbcClient.sql("""
 					 INSERT INTO book(title, author, status, createdAt)
 				VALUES(:title, :author, :status, :createdAt)
-				""").param("title", book.getTitle()).param("author", book.getAuthor())
-				.param("status", book.getStatus().name()).param("createdAt", book.getCreatedAt())
-				.update(keyHolder, "id");
+				""")
+					.param("title", book.getTitle())
+					.param("createdAt", book.getCreatedAt())
+					.update(keyHolder, "id");
 		// DBが作るIDを受け取る箱の用意
 		int newId = keyHolder.getKey().intValue();
 		// 発行されたIDと一緒に新しい本の情報を返す

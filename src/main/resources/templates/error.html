@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>書籍管理アプリ</title>
+</head>
+<body>
+<h1>エラー画面</h1>
+<p th:next="${message ?: 'エラーが発生しました。'}">エラーが発生しました。</p>
+<p><a href="./book/index.html" th:href="@{/}">一覧に戻る</a></p>
+</body>
+</html>

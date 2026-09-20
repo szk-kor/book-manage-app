@@ -7,9 +7,9 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import manage.entity.BookEntity;
-import manage.entity.BookStatus;
-import manage.repository.BookRepository;
+import manage.persistence.entity.BookEntity;
+import manage.persistence.entity.BookStatus;
+import manage.persistence.repository.BookRepository;
 
 @Service
 public class BookService {

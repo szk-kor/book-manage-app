@@ -1,8 +1,9 @@
-package manage.form;
+package manage.web.form;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import manage.entity.BookStatus;
+
+import manage.persistence.entity.BookStatus;
 
 public record BookForm(
 		@NotBlank String title, 

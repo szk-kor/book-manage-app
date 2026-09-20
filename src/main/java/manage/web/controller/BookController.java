@@ -1,4 +1,4 @@
-package manage.controller;
+package manage.web.controller;
 
 import java.util.List;
 
@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import manage.entity.BookEntity;
-import manage.entity.BookStatus;
-import manage.form.BookForm;
+import manage.persistence.entity.BookEntity;
+import manage.persistence.entity.BookStatus;
 import manage.service.BookService;
+import manage.web.exception.BookNotFoundException;
+import manage.web.form.BookForm;
 
 @Controller
 public class BookController {
@@ -60,7 +61,7 @@ public class BookController {
 	// 本の編集画面の取得
 	@GetMapping("/book/updateBook/{id}")
 	public String showUpdateForm(@PathVariable Integer id, Model model) {
-		BookEntity book = bookService.searchById(id).orElseThrow();
+		BookEntity book = bookService.searchById(id).orElseThrow(() -> new BookNotFoundException(id));
 		BookForm bookForm = new BookForm(book.getTitle(), book.getAuthor(), book.getStatus());
 		model.addAttribute("bookForm", bookForm);
 		model.addAttribute("id", id);
@@ -71,6 +72,9 @@ public class BookController {
 	@PostMapping("/book/updateBook/{id}")
 	public String updateBookPage(@PathVariable Integer id, @Validated @ModelAttribute("bookForm") BookForm bookForm,
 			BindingResult bindingResult, Model model) {
+		if (bookService.searchById(id).isEmpty()) {
+		    throw new BookNotFoundException(id);
+		}
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("id", id);
 			return "book/updateBook";
@@ -87,6 +91,9 @@ public class BookController {
 	// 削除
 	@PostMapping("/book/deleteBook/{id}")
 	public String deleteBook(@PathVariable Integer id) {
+		if (bookService.searchById(id).isEmpty()) {
+		    throw new BookNotFoundException(id);
+		}
 		bookService.deleteById(id);
 		return "redirect:/";
 	}

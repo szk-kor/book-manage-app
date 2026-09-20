@@ -36,3 +36,4 @@ Servers/
 data/
 *.mv.db
 *.trace.db
+/bin/

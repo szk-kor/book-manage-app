@@ -1,4 +1,4 @@
-package manage.test.repository;
+package manage.repository;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,9 +21,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.transaction.annotation.Transactional;
 
-import manage.entity.BookEntity;
-import manage.entity.BookStatus;
-import manage.repository.BookRepository;
+import manage.persistence.entity.BookEntity;
+import manage.persistence.entity.BookStatus;
+import manage.persistence.repository.BookRepository;
 
 @SpringBootTest(properties = { "spring.datasource.url=jdbc:h2:mem:booktest;DB_CLOSE_DELAY=-1",
 		"spring.datasource.username=sa", "spring.datasource.password=" })
