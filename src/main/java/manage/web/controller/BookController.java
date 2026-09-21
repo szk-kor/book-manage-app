@@ -111,7 +111,7 @@ public class BookController {
 		return "book/index";
 	}
 
-	// ワード検索
+	// キーワード検索
 	@GetMapping("/book/searchByKeyword")
 	public String searchByKeyword(@RequestParam(required = false) String keyword, Model model) {
 		List<BookEntity> bookList;
