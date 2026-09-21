@@ -26,6 +26,38 @@ Spring Bootの学習を進める中で、Controller・Service・Repositoryがど
 
 ---
 
+## 起動方法
+
+通常起動ではH2のファイルDBを使用します。
+
+```bash
+./mvnw spring-boot:run
+```
+
+Windows環境では、以下でも起動できます。
+
+```bash
+mvnw.cmd spring-boot:run
+```
+
+### デモ用データでの起動
+
+デモ用データを利用する場合は、`demo`プロファイルを指定して起動します。
+
+```bash
+./mvnw spring-boot:run -Dspring-boot.run.profiles=demo
+```
+
+Windows環境では、以下でも起動できます。
+
+```bash
+mvnw.cmd spring-boot:run -Dspring-boot.run.profiles=demo
+```
+
+デモプロファイルでは、インメモリH2データベースを使用し、起動時に`demo-data.sql`からサンプルデータを投入します。
+
+---
+
 ## 主な機能
 
 - 書籍一覧表示
@@ -38,6 +70,16 @@ Spring Bootの学習を進める中で、Controller・Service・Repositoryがど
 - 存在しない書籍IDを指定した場合の例外処理
 
 読書ステータスはEnumで管理しています。
+
+---
+
+## データベース
+
+通常利用時はH2のファイルDBを使用しています。
+
+デモ用には別プロファイルを用意しており、インメモリH2データベースと`demo-data.sql`のサンプルデータを使用します。
+
+実際のDBファイルはGit管理の対象外としています。
 
 ---
 
