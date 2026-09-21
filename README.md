@@ -8,6 +8,7 @@ Spring Bootの学習を進める中で、Controller・Service・Repositoryがど
 教材を参考にしつつ、そのまま写すのではなく、自分が実際に使うことを想定して検索機能やバリデーション、例外処理、テストなどを追加しています。
 
 個人利用を前提としているため、現時点ではログイン・認証・認可機能は実装していません。
+
 ---
 
 ## 使用技術
@@ -20,6 +21,7 @@ Spring Bootの学習を進める中で、Controller・Service・Repositoryがど
 - JUnit 5
 - Mockito
 - HTML / CSS
+
 ---
 
 ## 起動方法
@@ -51,6 +53,7 @@ Spring Bootの学習を進める中で、Controller・Service・Repositoryがど
 - 存在しない書籍IDを指定した場合の例外処理
 
 読書ステータスはEnumで管理しています。
+
 ---
 
 ## データベース
@@ -59,6 +62,7 @@ Spring Bootの学習を進める中で、Controller・Service・Repositoryがど
 デモ用には別プロファイルを用意しており、インメモリH2データベースと`demo-data.sql`のサンプルデータを使用します。
 
 実際のDBファイルはGit管理の対象外としています。
+
 ---
 
 ## テスト
