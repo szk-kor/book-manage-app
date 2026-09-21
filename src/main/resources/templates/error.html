@@ -2,11 +2,11 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/error.css}">
 <title>書籍管理アプリ</title>
 </head>
 <body>
-<h1>エラー画面</h1>
-<p th:next="${message ?: 'エラーが発生しました。'}">エラーが発生しました。</p>
+<h1 th:next="${message ?: 'エラーが発生しました。'}">エラーが発生しました。</h1>
 <p><a href="./book/index.html" th:href="@{/}">一覧に戻る</a></p>
 </body>
 </html>
