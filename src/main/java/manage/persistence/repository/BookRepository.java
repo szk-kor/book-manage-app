@@ -90,6 +90,8 @@ public class BookRepository {
 				VALUES(:title, :author, :status, :createdAt)
 				""")
 					.param("title", book.getTitle())
+					.param("author",book.getAuthor())
+					.param("status", book.getStatus().name())
 					.param("createdAt", book.getCreatedAt())
 					.update(keyHolder, "id");
 		// DBが作るIDを受け取る箱の用意
