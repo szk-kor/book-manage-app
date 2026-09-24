@@ -31,6 +31,7 @@ Spring Bootの学習を進める中で、Controller・Service・Repositoryがど
 追加・編集・削除・検索機能を自由にお試しください。
 
 データはアプリ終了時にリセットされます。
+
 ---
 
 ## 主な機能
