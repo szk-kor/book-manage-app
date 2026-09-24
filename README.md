@@ -24,22 +24,13 @@ Spring Bootの学習を進める中で、Controller・Service・Repositoryがど
 
 ---
 
-## 起動方法
-通常起動ではH2のファイルDBを使用します。
+## 起動時について
 
-```bash
-./mvnw spring-boot:run
-```
+デモデータが読み込まれます。
 
-### デモ用データでの起動
-デモ用データを利用する場合は、`demo`プロファイルを指定して起動します。
+追加・編集・削除・検索機能を自由にお試しください。
 
-```bash
-./mvnw spring-boot:run -Dspring-boot.run.profiles=demo
-```
-
-デモプロファイルでは、インメモリH2データベースを使用し、起動時に`demo-data.sql`からサンプルデータを投入します。
-
+データはアプリ終了時にリセットされます。
 ---
 
 ## 主な機能
